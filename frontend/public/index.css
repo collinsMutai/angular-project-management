@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    padding: 50px;
+}
+form{
+   width: 450px;
+  
+}
+input{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+div{
+    margin-bottom: 20px;
+}

@@ -1,0 +1,31 @@
+
+
+POST http://localhost:7000/user/signup
+Content-Type: application/json
+
+{
+    "email":"user4@gmail.com",
+    "name":"user4",
+    "password":"12345678"
+}
+
+###
+POST http://localhost:7000/user/login
+Content-Type: application/json
+
+{
+    "email":"collins@gmail.com",
+    "password":"12345678"
+}
+
+
+###
+
+GET  http://localhost:7000/user/homepage
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlN2NjMGNmLTIxZDItNDE2My05NjkxLWZmMDM5MTU2N2VhMSIsIm5hbWUiOiJDb2xsaW5zIiwiZW1haWwiOiJjb2xsaW5zQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1OTg1MDgxOCwiZXhwIjoxNjU5ODU0NDE4fQ.N54diN6_t0-6Zgx2KJ9eVgUaO-S3ZR0hQCbIdR4ACz4
+
+
+###
+
+GET  http://localhost:7000/user/check
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlN2NjMGNmLTIxZDItNDE2My05NjkxLWZmMDM5MTU2N2VhMSIsIm5hbWUiOiJDb2xsaW5zIiwiZW1haWwiOiJjb2xsaW5zQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1OTc2NTAwNSwiZXhwIjoxNjU5NzY4NjA1fQ.fxzwaGQTWx1zII6ytezzvK62iweaPZNJzi05dN5cdKM

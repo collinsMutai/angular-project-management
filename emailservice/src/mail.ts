@@ -4,7 +4,7 @@ import SendEmails from './EmailService/EmailService'
 const app = express()
 
 const run =()=>{
-    cron.schedule('*/5 * * * *', async()=>{
+    cron.schedule('* * * * *', async()=>{
         console.log('cron is running');
         await SendEmails()
         

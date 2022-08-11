@@ -17,6 +17,7 @@ export const UserSchema3= Joi.object({
     user_id:Joi.string()
 })
 export const UserSchema4= Joi.object({
-    project_id:Joi.string().required()
+    name:Joi.string().required(),
+    user_id:Joi.string().required()
 })
 

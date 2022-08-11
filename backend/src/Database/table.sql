@@ -38,7 +38,7 @@
 
 -- -- CREATE TABLE ProjectsTable( id VARCHAR(80), name VARCHAR(200),   description VARCHAR(200) , end_date VARCHAR(200), user_email VARCHAR(200) FOREIGN KEY REFERENCES UsersTable(email))
 
--- CREATE TABLE ProjectsTable( project_id VARCHAR(80), name VARCHAR(200),   description VARCHAR(200) , end_date VARCHAR(200),
+-- CREATE TABLE ProjectsTable( project_id VARCHAR(80), name VARCHAR(200) UNIQUE,   description VARCHAR(200) , end_date VARCHAR(200),
 -- issent VARCHAR(10) DEFAULT 0, user_id VARCHAR(80)
 -- )
 
@@ -102,3 +102,14 @@
 -- DELETE FROM ProjectsTable WHERE project_id=@Project_id
 -- END
 -- END
+
+
+
+
+-- SELECT * FROM projectsTable WHERE issent='0' 
+
+-- SELECT email FROM UsersTable u INNER JOIN projectsTable p ON p.user_id =@User_Id
+
+-- DELETE from UsersTable WHERE name = 'kiprop'
+
+-- select * from UsersTable

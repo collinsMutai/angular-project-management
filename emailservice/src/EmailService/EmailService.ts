@@ -17,8 +17,9 @@ interface Task{
 const SendEmails= async()=>{
 const pool = await mssql.connect(sqlConfig)
 const tasks:Task[]= await(await pool.request().query(`
-SELECT * FROM projectsTable WHERE issent='0'`)).recordset
+SELECT email FROM UsersTable u INNER JOIN projectsTable p ON p.user_id =User_Id`)).recordset
 console.log(tasks);
+
 
 
  for(let task of tasks){

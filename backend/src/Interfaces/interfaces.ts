@@ -15,3 +15,10 @@ export interface Data{
   iat: number,
   exp: number
 }
+
+export interface Project{
+  id:string,
+  name:string,
+  description:string,
+  end_date:string
+}

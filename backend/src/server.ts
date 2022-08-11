@@ -7,6 +7,7 @@ const app= express()
 app.use(json())
 app.use(cors())
 app.use('/user', router)
+app.use('/project', router)
 
 
 app.listen(7000,()=>{

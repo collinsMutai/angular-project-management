@@ -79,7 +79,7 @@ class Users {
             }).then(res=>resolve(res.json()))
             .catch(err=>reject(err))
         }).then(data=>{
-            // console.log(data)
+    
             localStorage.setItem('name',data.name)
             if(data.role === 'admin'){
                 location.href="adminDashboard.html"

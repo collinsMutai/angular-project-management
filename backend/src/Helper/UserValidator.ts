@@ -10,3 +10,9 @@ export const UserSchema2= Joi.object({
     email:Joi.string().required().email(),
     password:Joi.string().required().min(8)
 })
+export const UserSchema3= Joi.object({
+    name:Joi.string().required(),
+    description:Joi.string().required(),
+    end_date:Joi.string().required()
+})
+

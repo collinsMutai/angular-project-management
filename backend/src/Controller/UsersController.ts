@@ -89,12 +89,16 @@ export const loginUser=async(req:ExtendedRequest, res:Response)=>{
 
 export const getHomepage=async(req:Extended, res:Response)=>{
    if(req.info){
+    console.log(req.info);
+    
      return res.json({message:`Welcome to the Homepage ${req.info.email}`})
    }
 }
 
 export const checkUser = async(req: Extended, res: Response)=>{
     if(req.info){
+        // console.log(req.info);
+        
         res.json({name:req.info.name, role:req.info.role})
     }
 }

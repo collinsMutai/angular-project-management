@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
     <title>Admin Dashboard</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1 id="admin">Welcome Admin</h1>
+    <div>
+      <form action="">
+        <label for="">Project Name</label>
+        <input id="project_name" name="project_name" type="text" />
+        <label for="project_description">Description</label>
+        <input
+          id="project_description"
+          name="project_description"
+          type="text"
+        />
+        <label for="end_date">End date</label>
+        <input id="project_end_date" name="project_end_date" type="text" />
+        <button id="submit_project" type="button">Post project</button>
+      </form>
+    </div>
+    <div>
+      <div>
+        <p id="pName">Project Name</p>
+
+        <p id="pDescription">Project Description</p>
+
+        <p id="pEnddate">Project End Date</p>
+      </div>
+    </div>
     <script src="../dist/admin.js"></script>
-</body>
+  </body>
 </html>

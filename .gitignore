@@ -3,3 +3,6 @@ backend/dist
 backend/.env
 frontend/dist
 frontend/node_modules
+emailservice/dist
+emailservice/node_modules
+emailservice/.env

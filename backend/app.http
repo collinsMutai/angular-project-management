@@ -4,8 +4,8 @@ POST http://localhost:7000/user/signup
 Content-Type: application/json
 
 {
-    "email":"collins@gmail.com",
-    "name":"collins",
+    "email":"user1@gmail.com",
+    "name":"user1",
     "password":"12345678"
 }
 
@@ -34,16 +34,33 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlN2NjMGNmLTIxZDItNDE2My05N
 
 
 
+###
+GET  http://localhost:7000/user/users
+
+
 # projects
 ###
 POST http://localhost:7000/project/newproject
 Content-Type: application/json
 
 {
-    "name":"project two",
+    "name":"project 6",
     "description":"This is project two",
     "end_date": "Aug 12 2022"
 }
 
 ###
-GET  http://localhost:7000/project/projects
+POST http://localhost:7000/project/assignNewProject
+Content-Type: application/json
+
+{
+    "name":"project 5",
+    "user_id":"22b072a2-91c2-4c22-b622-5de2bce6e7db"}
+
+###
+POST http://localhost:7000/project/deleteProject
+Content-Type: application/json
+
+{
+    "project_id":"9f96064f-f187-4849-a975-1b0e6204b05df"
+    }

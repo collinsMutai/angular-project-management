@@ -3,11 +3,11 @@
 -- DROP TABLE UsersTable
 
 
--- CREATE TABLE UsersTable( id VARCHAR(80), name VARCHAR(200),   email VARCHAR(200) UNIQUE , password VARCHAR(200), role VARCHAR(200) DEFAULT 'user', issent VARCHAR(10) DEFAULT 0)
+-- CREATE TABLE UsersTable( id VARCHAR(80), name VARCHAR(200),   email VARCHAR(200) UNIQUE , password VARCHAR(200), role VARCHAR(200) DEFAULT 'user')
 
 
 
--- UPDATE UsersTable SET role='admin' WHERE id ='712cf667-f0f8-44e7-abf5-1934a7995246'
+-- UPDATE UsersTable SET role='admin' WHERE id ='820e83ec-008f-4376-b4bb-4250c6a9993c'
 
 -- SELECT * FROM UsersTable
 
@@ -26,7 +26,11 @@
 -- SELECT * FROM UsersTable WHERE email =@email
 -- END
 
-
+-- CREATE PROCEDURE getallusers
+-- AS
+-- BEGIN
+-- SELECT * FROM UsersTable
+-- END
 
 
 -- -- projects
@@ -34,22 +38,22 @@
 
 -- -- CREATE TABLE ProjectsTable( id VARCHAR(80), name VARCHAR(200),   description VARCHAR(200) , end_date VARCHAR(200), user_email VARCHAR(200) FOREIGN KEY REFERENCES UsersTable(email))
 
--- CREATE TABLE ProjectsTable( id VARCHAR(80), name VARCHAR(200) UNIQUE,   description VARCHAR(200) , end_date VARCHAR(200), email VARCHAR(200), issent VARCHAR(10) DEFAULT 0)
+-- CREATE TABLE ProjectsTable( project_id VARCHAR(80), name VARCHAR(200),   description VARCHAR(200) , end_date VARCHAR(200),
+-- issent VARCHAR(10) DEFAULT 0, user_id VARCHAR(80)
+-- )
 
 
--- ALTER TABLE ProjectsTable
---    DROP COLUMN role
 
 
 -- SELECT * FROM ProjectsTable
 
 -- DROP TABLE ProjectsTable
 
--- CREATE PROCEDURE insertProject ( @id VARCHAR(80), @name VARCHAR(200), @description VARCHAR(200), @end_date VARCHAR(200))
+-- CREATE PROCEDURE insertProject ( @project_id VARCHAR(80), @name VARCHAR(200), @description VARCHAR(200), @end_date VARCHAR(200))
 -- AS
 -- BEGIN
 
--- INSERT INTO ProjectsTable(id,name,description,end_date) VALUES(@id, @name, @description, @end_date)
+-- INSERT INTO ProjectsTable(project_id,name,description,end_date) VALUES(@project_id, @name, @description, @end_date)
 
 -- END
 
@@ -69,3 +73,32 @@
 
 
 -- SELECT * FROM projectsTable WHERE issent='0'
+
+-- CREATE PROCEDURE assignProject (@name VARCHAR(200), @User_Id VARCHAR(80))
+-- AS
+-- BEGIN
+-- IF EXISTS(SELECT * FROM dbo.ProjectsTable WHERE user_id IS NULL AND name=@name)
+--    BEGIN 
+--          IF EXISTS( SELECT * FROM dbo.ProjectsTable WHERE user_id = @User_Id)
+--       BEGIN
+--          RAISERROR('user on another project',11,1);
+--       END
+--    ELSE
+--       BEGIN
+--          update dbo.ProjectsTable set user_Id = @User_Id WHERE name=@name;
+--       END
+--    END
+--    ELSE
+--       BEGIN
+--          RAISERROR('USER OR PROJECT ID DOES NOT EXIST/ASSIGNED',11,1);
+--       END
+-- END
+
+-- CREATE PROCEDURE deleteProject (@Project_id VARCHAR(80))
+-- AS
+-- BEGIN
+-- IF EXISTS(SELECT * FROM ProjectsTable WHERE project_id=@Project_id)
+-- BEGIN
+-- DELETE FROM ProjectsTable WHERE project_id=@Project_id
+-- END
+-- END

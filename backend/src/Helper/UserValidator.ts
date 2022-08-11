@@ -13,6 +13,10 @@ export const UserSchema2= Joi.object({
 export const UserSchema3= Joi.object({
     name:Joi.string().required(),
     description:Joi.string().required(),
-    end_date:Joi.string().required()
+    end_date:Joi.string().required(),
+    user_id:Joi.string()
+})
+export const UserSchema4= Joi.object({
+    project_id:Joi.string().required()
 })
 

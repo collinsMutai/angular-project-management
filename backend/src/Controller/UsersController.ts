@@ -102,3 +102,16 @@ export const checkUser = async(req: Extended, res: Response)=>{
         res.json({name:req.info.name, role:req.info.role})
     }
 }
+export const getallusers = async(req: Extended, res: Response)=>{
+    try {
+        const pool = await mssql.connect(sqlConfig)
+        const allusers = await pool.request().execute("getallusers")
+        // console.log(allprojects);
+        res.json(allusers)
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+    
+    }

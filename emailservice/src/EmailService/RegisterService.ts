@@ -4,39 +4,38 @@ import dotenv from 'dotenv'
 import {sqlConfig} from '../Config/Config'
 dotenv.config()
 import sendMail from '../Helpers/Email'
-interface Task{
+interface user{
     id:number
     name:string
     description:string,
     end_date:string,
     email: string,
     issent:string,
-    user_id:string,
-    project_id:string
+    status:string
 }
 
 
-const SendEmails= async()=>{
+const RegisterEmail= async()=>{
 const pool = await mssql.connect(sqlConfig)
-const tasks:Task[]= await(await pool.request().query(`
-SELECT email FROM UsersTable u INNER JOIN projectsTable p ON p.user_id =User_Id`)).recordset
-console.log(tasks);
+const users:user[]= await(await pool.request().query(`
+SELECT * FROM UsersTable WHERE status='0'`)).recordset
+console.log(users);
 
 
 
- for(let task of tasks){
+ for(let user of users){
 
-    ejs.renderFile('templates/registration.ejs',{name:task.name,task:task.description} ,async(error,data)=>{
+    ejs.renderFile('templates/registeremail.ejs',{name:user.name} ,async(error,data)=>{
 
         let messageoption={
             from:process.env.EMAIL,
-            to:task.email,
-            subject:"Jitu Project Task",
+            to:user.email,
+            subject:"Welcome to The Jitu",
             html:data,
             attachments:[
                 {
-                    filename:'task.txt',
-                    content:`You have been assigned a task : ${task.description}`
+                    filename:'user.text',
+                    content:`Welcome newsletter : ${user.name}`
                 }
             ]
         }
@@ -44,7 +43,7 @@ console.log(tasks);
         try {
             
             await sendMail(messageoption)
-            await  pool.request().query(`UPDATE ProjectsTable SET issent='1' WHERE user_id ='${task.user_id}'`)
+            await pool.request().query(`UPDATE UsersTable SET status='1' WHERE id = '${user.id}'`)
             console.log('Email is Sent');
             
         } catch (error) {
@@ -60,4 +59,4 @@ console.log(tasks);
 
 }
 
-export default SendEmails
+export default RegisterEmail

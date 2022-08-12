@@ -1,11 +1,10 @@
 
-
 POST http://localhost:7000/user/signup
 Content-Type: application/json
 
 {
-    "email":"collinsfrontend@gmail.com",
-    "name":"collo",
+    "email":"jonathanndambuki16@gmail.com",
+    "name":"user1",
     "password":"12345678"
 }
 
@@ -16,7 +15,7 @@ POST http://localhost:7000/user/login
 Content-Type: application/json
 
 {
-    "email":"collins@gmail.com",
+    "email":"jonathanndambuki16@gmail.com",
     "password":"12345678"
 }
 
@@ -24,7 +23,7 @@ Content-Type: application/json
 ###
 
 GET  http://localhost:7000/user/homepage
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlN2NjMGNmLTIxZDItNDE2My05NjkxLWZmMDM5MTU2N2VhMSIsIm5hbWUiOiJDb2xsaW5zIiwiZW1haWwiOiJjb2xsaW5zQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1OTk1NzYzOCwiZXhwIjoxNjU5OTYxMjM4fQ.SZbtEsvwYePbqIuSIRuhsl3o3IRk7CeakubzESjiK5Q
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyYjE1NGUyLTA1MzQtNDk1Ni1hZWFkLTQ2NTc4MWEyMDc0YyIsIm5hbWUiOiJ1c2VyMSIsImVtYWlsIjoiam9uYXRoYW5uZGFtYnVraTE2QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwic3RhdHVzIjoiMSIsImlhdCI6MTY2MDMxMzY3OCwiZXhwIjoxNjYwMzE3Mjc4fQ.mkGNs92Dea4gG37Lc6uPn23POKF5jSpNfTRgK8S9bds
 
 
 ###
@@ -44,7 +43,7 @@ POST http://localhost:7000/project/newproject
 Content-Type: application/json
 
 {
-    "name":"project 7",
+    "name":"project 3",
     "description":"This is project two",
     "end_date": "Aug 12 2022"
 }
@@ -53,13 +52,13 @@ Content-Type: application/json
 POST http://localhost:7000/project/assignNewProject
 Content-Type: application/json
 
-{   "name":"project 7",
-    "user_id":"5fa07baa-8a92-4bdd-bc9b-919a7b956fab"}
+{   "name":"project 3",
+    "user_id":"32b154e2-0534-4956-aead-465781a2074c"}
 
 ###
 POST http://localhost:7000/project/deleteProject
 Content-Type: application/json
 
 {
-    "project_id":"9f96064f-f187-4849-a975-1b0e6204b05df"
+    "project_id":"e85a111f-c2a5-4b69-85e6-174306f21fd4"
     }

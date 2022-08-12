@@ -19,7 +19,7 @@ interface Task{
 const SendEmails= async()=>{
 const pool = await mssql.connect(sqlConfig)
 const tasks:Task[]= await(await pool.request().query(`
-SELECT email FROM UsersTable u INNER JOIN projectsTable p ON p.user_id =User_Id`)).recordset
+SELECT email FROM UsersTable u INNER JOIN projectsTable p ON p.user_id =User_Id WHERE user_id IS NOT NULL AND issent=0`)).recordset
 console.log(tasks);
 
 
@@ -44,7 +44,7 @@ console.log(tasks);
         try {
             
             await sendMail(messageoption)
-            await  pool.request().query(`UPDATE ProjectsTable SET issent='1' WHERE user_id ='${task.user_id}'`)
+            await  pool.request().query(`UPDATE ProjectsTable SET issent=1 WHERE issent=0`)
             console.log('Email is Sent');
             
         } catch (error) {

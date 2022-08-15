@@ -21,5 +21,6 @@ export interface Project{
   name:string,
   description:string,
   end_date:string,
-  user_id:string
+  user_id:string,
+  email:string
 }

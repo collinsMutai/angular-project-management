@@ -3,8 +3,8 @@ POST http://localhost:7000/user/signup
 Content-Type: application/json
 
 {
-    "email":"collinsfrontend@gmail.com",
-    "name":"user1",
+    "email":"mainaann367@gmail.com",
+    "name":"ann",
     "password":"12345678"
 }
 
@@ -45,7 +45,8 @@ Content-Type: application/json
 {
     "name":"project 1",
     "description":"This is project two",
-    "end_date": "Aug 12 2022"
+    "end_date": "Aug 12 2022",
+    "assigned_user_email":"mainaann367@gmail.com"
 }
 
 ###
@@ -62,3 +63,14 @@ Content-Type: application/json
 {
     "project_id":"e85a111f-c2a5-4b69-85e6-174306f21fd4"
     }
+
+###
+GET  http://localhost:7000/project/projects
+
+###
+POST  http://localhost:7000/project/project
+Content-Type: application/json
+
+{
+    "email": "user3@gmail.com"
+}

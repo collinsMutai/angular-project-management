@@ -14,10 +14,14 @@ export const UserSchema3= Joi.object({
     name:Joi.string().required(),
     description:Joi.string().required(),
     end_date:Joi.string().required(),
-    user_id:Joi.string()
+    user_id:Joi.string(),
+    assigned_user_email:Joi.string().required()
 })
 export const UserSchema4= Joi.object({
     name:Joi.string().required(),
     user_id:Joi.string().required()
+})
+export const UserSchema5= Joi.object({
+    email:Joi.string().required()
 })
 

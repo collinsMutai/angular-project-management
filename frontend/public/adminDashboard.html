@@ -21,18 +21,18 @@
         />
         <label for="end_date">End date</label>
         <input id="project_end_date" name="project_end_date" type="text" />
+        <label for="end_date">Assigned User Email</label>
+        <select id="allUsers">
+          <option value="option"> SELECT USER</option>
+        </select></br>
+        <!-- <input id="assigned_user_email" name="assigned_user_email" type="text" /> -->
         <button id="submit_project" type="button">Post project</button>
       </form>
     </div>
     <div>
-      <div>
-        <p id="pName">Project Name</p>
 
-        <p id="pDescription">Project Description</p>
-
-        <p id="pEnddate">Project End Date</p>
-      </div>
     </div>
+    <div id="usersDiv"></div>
     <script src="../dist/admin.js"></script>
   </body>
 </html>

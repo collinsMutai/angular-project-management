@@ -81,6 +81,7 @@ class Users {
         }).then(data=>{
     
             localStorage.setItem('name',data.name)
+            
             if(data.role === 'admin'){
                 location.href="adminDashboard.html"
             }else{

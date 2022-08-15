@@ -12,14 +12,15 @@ interface Task{
     email: string,
     issent:string,
     user_id:string,
-    project_id:string
+    project_id:string,
+    assigned_user_email:string
 }
 
 
 const SendEmails= async()=>{
 const pool = await mssql.connect(sqlConfig)
 const tasks:Task[]= await(await pool.request().query(`
-SELECT email FROM UsersTable u INNER JOIN projectsTable p ON p.user_id =User_Id WHERE user_id IS NOT NULL AND issent=0`)).recordset
+SELECT email FROM UsersTable u INNER JOIN projectsTable p ON p.assigned_user_email =Email WHERE assigned_user_email IS NOT NULL AND issent=0`)).recordset
 console.log(tasks);
 
 

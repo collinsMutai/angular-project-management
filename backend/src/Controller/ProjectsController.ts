@@ -3,7 +3,7 @@ import mssql, { pool } from 'mssql'
 import { sqlConfig } from "../Config/Config";
 import {v4 as uuid} from 'uuid'
 import bcrypt from 'bcrypt'
-import { UserSchema, UserSchema2, UserSchema3, UserSchema4 } from'../Helper/UserValidator'
+import { UserSchema, UserSchema2, UserSchema3, UserSchema4, UserSchema5 } from'../Helper/UserValidator'
 import {User} from '../Interfaces/interfaces'
 import jwt from 'jsonwebtoken'
 
@@ -22,14 +22,15 @@ interface ExtendedRequest extends Request{
         description:string
         end_date:string,
         user_id:string,
-        project_id:string
+        project_id:string,
+        assigned_user_email:string
     }
 }
 export const addNewProject=async( req:ExtendedRequest, res:Response)=>{
     try {
         const pool=await mssql.connect(sqlConfig)
         const project_id =uuid()
-        const {name,description, end_date}= req.body
+        const {name,description, end_date, assigned_user_email}= req.body
         const {error , value}= UserSchema3.validate(req.body)
         if(error){
             return res.json({error:error.details[0].message})
@@ -40,6 +41,7 @@ export const addNewProject=async( req:ExtendedRequest, res:Response)=>{
         . input('name', mssql.VarChar, name)
         . input('description', mssql.VarChar, description)
         . input('end_date', mssql.VarChar, end_date)
+        . input('assigned_user_email', mssql.VarChar, assigned_user_email)
         .execute('insertProject')
 
       
@@ -90,3 +92,34 @@ export const deleteProject=async( req:ExtendedRequest, res:Response)=>{
     }
 
 }
+export const getallProjects = async(req: Extended, res: Response)=>{
+    try {
+        const pool = await mssql.connect(sqlConfig)
+        const allprojects:Project[] = await (await pool.request().execute("getallprojects")).recordset
+        console.log(allprojects);
+        res.json(allprojects)
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+    
+    }
+export const getProject = async(req: Extended, res: Response)=>{
+    try {
+        const pool = await mssql.connect(sqlConfig)
+        const {email}= req.body
+        const {error , value}= UserSchema5.validate(req.body)
+        if(error){
+            return res.json({error:error.details[0].message})
+        }
+        const project:Project[] = await (await pool.request(). input('email', mssql.VarChar, email).execute("getProject")).recordset
+        // const project:Project[] = await (await pool.request() 
+        //  . input('assigned_user_email', mssql.VarChar, assigned_user_email)
+        //  .execute("getProject")).recordset
+        res.json(project)
+    } catch (error) {
+        res.json({error})
+    }
+    
+    }

@@ -3,11 +3,13 @@
 -- DROP TABLE UsersTable
 
 
--- CREATE TABLE UsersTable( id VARCHAR(80), name VARCHAR(200),   email VARCHAR(200) UNIQUE , password VARCHAR(200), role VARCHAR(200) DEFAULT 'user')
+-- CREATE TABLE UsersTable( id VARCHAR(80), name VARCHAR(200),   email VARCHAR(200) UNIQUE , password VARCHAR(200), role VARCHAR(200) DEFAULT 'user', status VARCHAR(80) DEFAULT 0)
 
 
 
--- UPDATE UsersTable SET role='admin' WHERE id ='820e83ec-008f-4376-b4bb-4250c6a9993c'
+
+
+-- UPDATE UsersTable SET role='admin' WHERE id ='b79a7ddf-a270-4b72-8abf-ea26883e683b'
 
 -- SELECT * FROM UsersTable
 
@@ -36,10 +38,9 @@
 -- -- projects
 
 
--- -- CREATE TABLE ProjectsTable( id VARCHAR(80), name VARCHAR(200),   description VARCHAR(200) , end_date VARCHAR(200), user_email VARCHAR(200) FOREIGN KEY REFERENCES UsersTable(email))
 
 -- CREATE TABLE ProjectsTable( project_id VARCHAR(80), name VARCHAR(200) UNIQUE,   description VARCHAR(200) , end_date VARCHAR(200),
--- issent VARCHAR(10) DEFAULT 0, user_id VARCHAR(80)
+-- issent VARCHAR(10) DEFAULT 0, user_id VARCHAR(80), assigned_user_email VARCHAR(200)
 -- )
 
 
@@ -49,24 +50,24 @@
 
 -- DROP TABLE ProjectsTable
 
--- CREATE PROCEDURE insertProject ( @project_id VARCHAR(80), @name VARCHAR(200), @description VARCHAR(200), @end_date VARCHAR(200))
+-- CREATE PROCEDURE insertProject ( @project_id VARCHAR(80), @name VARCHAR(200), @description VARCHAR(200), @end_date VARCHAR(200), @assigned_user_email VARCHAR(200))
 -- AS
 -- BEGIN
 
--- INSERT INTO ProjectsTable(project_id,name,description,end_date) VALUES(@project_id, @name, @description, @end_date)
+-- INSERT INTO ProjectsTable(project_id,name,description,end_date, assigned_user_email) VALUES(@project_id, @name, @description, @end_date, @assigned_user_email)
 
 -- END
 
 -- CREATE PROCEDURE getProject(@email VARCHAR(200))
 -- AS
 -- BEGIN
--- SELECT * FROM projectsTable WHERE email =@email
+-- SELECT * FROM ProjectsTable WHERE assigned_user_email =@email
 -- END
 
 -- CREATE PROCEDURE getAllProjects
 -- AS
 -- BEGIN
--- SELECT * FROM projectsTable
+-- SELECT * FROM ProjectsTable
 -- END
 
 -- INSERT INTO ProjectsTable (name, description, end_date, email) VALUES ('Collins', 'project 1', 'aug101989', 'collinsfrontend@gmail.com')
@@ -106,10 +107,20 @@
 
 
 
+
+
 -- SELECT * FROM projectsTable WHERE issent='0' 
 
 -- SELECT email FROM UsersTable u INNER JOIN projectsTable p ON p.user_id =@User_Id
 
--- DELETE from UsersTable WHERE name = 'kiprop'
+-- DELETE from UsersTable WHERE name = 'user1'
 
 -- select * from UsersTable
+-- select * from ProjectsTable
+
+-- TRUNCATE TABLE UsersTable
+-- TRUNCATE TABLE projectsTable
+
+
+-- SELECT email FROM UsersTable u LEFT JOIN ProjectsTable p ON p.user_id ='9c77912e-b9ae-4c94-8eae-6094dd075d84'
+-- UPDATE ProjectsTable SET issent='1' WHERE user_id = '9c77912e-b9ae-4c94-8eae-6094dd075d84'

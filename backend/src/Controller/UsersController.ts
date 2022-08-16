@@ -99,7 +99,7 @@ export const checkUser = async(req: Extended, res: Response)=>{
     if(req.info){
         // console.log(req.info);
         
-        res.json({name:req.info.name, role:req.info.role})
+        res.json({name:req.info.name, role:req.info.role, email:req.info.email})
     }
 }
 export const getallusers = async(req: Extended, res: Response)=>{

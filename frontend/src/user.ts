@@ -1,49 +1,65 @@
 const users = document.getElementById('user') as HTMLHeadingElement;
 const projdecs = document.getElementById('projdec') as HTMLParagraphElement;
 const names = localStorage.getItem('name')
-const projectD = localStorage.getItem('project')
-const getuserprojectDiv = document.getElementById('userProject') as HTMLDivElement
+const email = localStorage.getItem('email') as string
+const getprojectDiv = document.getElementById('userProject') as HTMLDivElement
+
+interface   ProjectInterface {
+    project_id: string,
+    name: string, 
+    description: string, 
+    end_date: string,
+    issent:number,
+    user_id: string,
+    assigned_user_email:string
+}
 
 
-
-if(names || projectD){
+if(names || email){
     users.textContent=`Welcome User: ${names}, Here's your Project`
-    projdecs.textContent=`Project name: ${projectD}`
+    
 }
 class UserProject {
    
     constructor() { }
+    getProject(assigned_user_email:string){
+        new Promise<any>((resolve, reject) => {
+            fetch('http://localhost:7000/project/project', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    "assigned_user_email": assigned_user_email
+                })
+            }).then(res => resolve(res.json()))
+                .catch(err => reject(err))
+        })
+    .then(data => {
+            console.log(data);
+            data.map((project:ProjectInterface,index:number)=>{
+            const projectcard = document.createElement('div')
+           projectcard.id='projectCard'
+            const h2 = document.createElement('h2')
+            const p1 = document.createElement('p')
+            const p2 = document.createElement('p')
+            const completeBtn = document.createElement('button')
+            h2.textContent = project.name
+            p1.textContent =   `Project description: ${project.description}`
+            p2.textContent= `Assigned to user: ${project.assigned_user_email}`
+            completeBtn.textContent='Complete project'
+            completeBtn.id='submit_project'
+            projectcard.append(h2,p1,p2, completeBtn)
+            getprojectDiv.append(projectcard)
+            })
 
- fetchProject() {
-    new Promise<any>((resolve, reject) => {
-        fetch('http://localhost:7000/project/project', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "GET",
-        }).then(res => resolve(res.json()))
-            .catch(err => reject(err))
-    }).then(data => {
-        console.log(data);
+        }).catch(err => console.log(err))
+        // console.log(index);
         
-          
-    //   data.map((project:ProjectInterface)=>{
-    //     console.log(project);
-       
-    //     const p1 = document.createElement('p')
-    //     const p2 = document.createElement('p')
-    //     p1.textContent = project.name
-    //     p2.textContent = project.description
-    //     getuserprojectDiv.append(p1,p2)
-    //    })
-
-
     }
-  
-    )
-}
+ 
 
 }
-const userp = new UserProject()
-userp.fetchProject()
+const uproject = new UserProject()
+uproject.getProject(email)

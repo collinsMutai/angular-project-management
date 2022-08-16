@@ -10,6 +10,8 @@ const submit_project = document.getElementById("submit_project") as HTMLButtonEl
 // const pEnddate = document.getElementById('pEnddate') as HTMLParagraphElement;
 const getusersDiv = document.getElementById('usersDiv') as HTMLDivElement;
 const allUsers=document.getElementById('allUsers') as HTMLInputElement
+const getuserprojectDiv = document.getElementById('userProject') as HTMLDivElement
+
 
 interface User {
     name: string
@@ -63,7 +65,7 @@ class Projects {
             console.log(data);
             
            
-            // this.redirect()
+            this.fetchProject()
         }).catch(err => console.log(err))
 
     }
@@ -73,26 +75,6 @@ class Projects {
         const data = await res.json();
 
        
-      
-        // new Promise<{ name: string, description: string, end_date: string, assigned_user_email:string }>((resolve, reject) => {
-        //     fetch('http://localhost:7000/project/projects', {
-        //         headers: {
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/json',
-        //         },
-        //         method: "GET",
-        //     }).then(res => resolve(res.json()))
-        //         .catch(err => reject(err))
-        // }).then(data => {
-        //     data.forEach(element => {
-        //         console.log(element);
-                
-        //     });
-          
-        //     console.log(data)
-
-        // }
-        // )
 
     }
 
@@ -108,15 +90,7 @@ class Projects {
                 .catch(err => reject(err))
         }).then(data => {
            
-            // console.log(data);
-            // let filteredData = data.filter((i:User)=>{
-                    
-            //         if(i.status == 0){
-            //             console.log(i);
-            //         }
-            //         return i
-            // })
-            //   filteredData();
+        
          data.map((user:User)=>{
       
             let html = `
@@ -131,14 +105,79 @@ class Projects {
       
         )
     }
+
+
+    fetchProject() {
+        new Promise<any>((resolve, reject) => {
+            fetch('http://localhost:7000/project/projects', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "GET",
+            }).then(res => resolve(res.json()))
+                .catch(err => reject(err))
+        }).then(data => {
+            // console.log(data);
+            
+              
+          data.map((project:ProjectInterface,index:number)=>{
+            console.log(project);
+           const projectcard = document.createElement('div')
+           projectcard.id='projectCard'
+            const h2 = document.createElement('h2')
+            const p1 = document.createElement('p')
+            const p2 = document.createElement('p')
+            const deleteBtn = document.createElement('button')
+            h2.textContent = project.name
+            p1.textContent =   `Project description: ${project.description}`
+            p2.textContent= `Assigned to user: ${project.assigned_user_email}`
+            deleteBtn.textContent='Delete project'
+            deleteBtn.id='deleteBtn'
+            projectcard.append(h2,p1,p2, deleteBtn)
+            getuserprojectDiv.append(projectcard)
+            const projectId = `${project.project_id}`
+            deleteBtn.addEventListener('click', (e)=>{
+                this.handleDelete(index,projectId)
+                
+            })
+           })
+    
+    
+        }
+      
+        )
+    }
+    handleDelete(index:number,projectId:string){
+        const prom =new Promise<{projectId:string}>((resolve, reject) => {
+            fetch('http://localhost:7000/project/deleteProject', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    "project_id": projectId
+                })
+            }).then(res => resolve(res.json()))
+                .catch(err => reject(err))
+        })
+        prom.then(data => {
+            console.log(data,index, projectId);
+            // this.addProject()
+
+        }).catch(err => console.log(err))
+        // console.log(index);
+        
+    }
 }
 
 
 
 const u = new Projects()
 u.fetchUsers()
-
-
+const userp = new Projects()
+userp.fetchProject()
 
 
 submit_project.addEventListener('click', () => {
@@ -146,6 +185,9 @@ submit_project.addEventListener('click', () => {
     const descriptioninput = project_description.value;
     const enddateinput = project_end_date.value;
     const assignedemailinput = allUsers.value;
+    project_name.value = '';
+    project_description.value='';
+    project_end_date.value='';
 
     if (nameinput == '' || descriptioninput == '' || enddateinput == '' || assignedemailinput=='' ) {
         console.log('Please fill in all fields');

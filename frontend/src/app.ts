@@ -68,7 +68,7 @@ class Users {
         const token = localStorage.getItem('token') as string
         // console.log(token);
         
-        new Promise<{name:string,role:string}>((resolve,reject)=>{
+        new Promise<{name:string,role:string, email:string}>((resolve,reject)=>{
             fetch('http://localhost:7000/user/check',{
                 headers: {
                     'Accept': 'application/json',
@@ -79,8 +79,10 @@ class Users {
             }).then(res=>resolve(res.json()))
             .catch(err=>reject(err))
         }).then(data=>{
+    console.log(data);
     
             localStorage.setItem('name',data.name)
+            localStorage.setItem('email',data.email)
             
             if(data.role === 'admin'){
                 location.href="adminDashboard.html"

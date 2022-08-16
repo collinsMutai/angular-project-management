@@ -72,5 +72,5 @@ POST  http://localhost:7000/project/project
 Content-Type: application/json
 
 {
-    "email": "user3@gmail.com"
+    "assigned_user_email": "user1@gmail.com"
 }

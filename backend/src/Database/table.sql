@@ -9,7 +9,7 @@
 
 
 
--- UPDATE UsersTable SET role='admin' WHERE id ='b79a7ddf-a270-4b72-8abf-ea26883e683b'
+-- UPDATE UsersTable SET role='admin' WHERE id ='49024070-5fe2-4c9d-890d-b6eaa27e67d3'
 
 -- SELECT * FROM UsersTable
 
@@ -40,7 +40,7 @@
 
 
 -- CREATE TABLE ProjectsTable( project_id VARCHAR(80), name VARCHAR(200) UNIQUE,   description VARCHAR(200) , end_date VARCHAR(200),
--- issent VARCHAR(10) DEFAULT 0, user_id VARCHAR(80), assigned_user_email VARCHAR(200)
+-- issent VARCHAR(10) DEFAULT 0, assigned_user_email VARCHAR(200)
 -- )
 
 
@@ -58,10 +58,10 @@
 
 -- END
 
--- CREATE PROCEDURE getProject(@email VARCHAR(200))
+-- CREATE PROCEDURE getProject(@assigned_user_email VARCHAR(200))
 -- AS
 -- BEGIN
--- SELECT * FROM ProjectsTable WHERE assigned_user_email =@email
+-- SELECT * FROM ProjectsTable WHERE assigned_user_email =@assigned_user_email
 -- END
 
 -- CREATE PROCEDURE getAllProjects
@@ -75,18 +75,18 @@
 
 -- SELECT * FROM projectsTable WHERE issent='0'
 
--- CREATE PROCEDURE assignProject (@name VARCHAR(200), @User_Id VARCHAR(80))
+-- CREATE PROCEDURE assignProject (@name VARCHAR(200), @Email VARCHAR(80))
 -- AS
 -- BEGIN
--- IF EXISTS(SELECT * FROM dbo.ProjectsTable WHERE user_id IS NULL AND name=@name)
+-- IF EXISTS(SELECT * FROM dbo.ProjectsTable WHERE assigned_user_email IS NULL AND name=@name)
 --    BEGIN 
---          IF EXISTS( SELECT * FROM dbo.ProjectsTable WHERE user_id = @User_Id)
+--          IF EXISTS( SELECT * FROM dbo.ProjectsTable WHERE assigned_user_email = @Email)
 --       BEGIN
 --          RAISERROR('user on another project',11,1);
 --       END
 --    ELSE
 --       BEGIN
---          update dbo.ProjectsTable set user_Id = @User_Id WHERE name=@name;
+--          update dbo.ProjectsTable set assigned_user_email = @Email WHERE name=@name;
 --       END
 --    END
 --    ELSE
@@ -124,3 +124,6 @@
 
 -- SELECT email FROM UsersTable u LEFT JOIN ProjectsTable p ON p.user_id ='9c77912e-b9ae-4c94-8eae-6094dd075d84'
 -- UPDATE ProjectsTable SET issent='1' WHERE user_id = '9c77912e-b9ae-4c94-8eae-6094dd075d84'
+
+-- ALTER TABLE ProjectsTable
+-- DROP COLUMN user_id

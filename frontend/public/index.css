@@ -7,6 +7,13 @@ body{
     padding: 50px;
     background-color: #fffde3;
     color: #000;
+    font-size: 16px;
+}
+h1{
+    font-size: 28px;
+}
+h2{
+    font-size: 20px;
 }
 .container{
     display: flex;
@@ -28,4 +35,34 @@ input{
 }
 div{
     margin-bottom: 20px;
+}
+#userProject{
+    display: flex;
+    gap: 20px;
+}
+#projectCard{
+    width: 250px;
+    height: 200px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+h2, p{
+    padding-bottom: 15px;
+}
+
+#deleteBtn, #submit_project{
+    width: 150px;
+    height: 40px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+}
+#submit_project{
+    background-color: green;
+    margin-top: 15px;
 }

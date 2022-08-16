@@ -22,6 +22,9 @@ export const UserSchema4= Joi.object({
     user_id:Joi.string().required()
 })
 export const UserSchema5= Joi.object({
-    email:Joi.string().required()
+    assigned_user_email:Joi.string().required()
+})
+export const UserSchema6= Joi.object({
+    project_id:Joi.string().required()
 })
 

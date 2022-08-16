@@ -1,0 +1,1 @@
+CREATE TABLE UsersTable( id VARCHAR(80), name VARCHAR(200),   email VARCHAR(200) UNIQUE , password VARCHAR(200), role VARCHAR(200) DEFAULT 'user', status VARCHAR(80) DEFAULT 0)

@@ -3,7 +3,7 @@ import mssql, { pool } from 'mssql'
 import { sqlConfig } from "../Config/Config";
 import {v4 as uuid} from 'uuid'
 import bcrypt from 'bcrypt'
-import { UserSchema, UserSchema2, UserSchema3, UserSchema4, UserSchema5 } from'../Helper/UserValidator'
+import { UserSchema, UserSchema2, UserSchema3, UserSchema4, UserSchema5, UserSchema6 } from'../Helper/UserValidator'
 import {User} from '../Interfaces/interfaces'
 import jwt from 'jsonwebtoken'
 
@@ -76,7 +76,7 @@ export const deleteProject=async( req:ExtendedRequest, res:Response)=>{
     try {
         const pool=await mssql.connect(sqlConfig)
         const {project_id}= req.body
-        const {error , value}= UserSchema4.validate(req.body)
+        const {error , value}= UserSchema6.validate(req.body)
         if(error){
             return res.json({error:error.details[0].message})
         }
@@ -105,21 +105,21 @@ export const getallProjects = async(req: Extended, res: Response)=>{
     }
     
     }
-export const getProject = async(req: Extended, res: Response)=>{
-    try {
-        const pool = await mssql.connect(sqlConfig)
-        const {email}= req.body
-        const {error , value}= UserSchema5.validate(req.body)
-        if(error){
-            return res.json({error:error.details[0].message})
+    export const getProject = async(req: Extended, res: Response)=>{
+        try {
+            const pool=await mssql.connect(sqlConfig)
+            const {assigned_user_email}= req.body
+            const {error , value}= UserSchema5.validate(req.body)
+            if(error){
+                return res.json({error:error.details[0].message})
+            }
+            const getproject:Project[]=await( await pool.request()
+            . input('assigned_user_email', mssql.VarChar, assigned_user_email)
+            .execute('getProject')).recordset
+          
+            res.json(getproject)
+        } catch (error) {
+            res.json({error})
         }
-        const project:Project[] = await (await pool.request(). input('email', mssql.VarChar, email).execute("getProject")).recordset
-        // const project:Project[] = await (await pool.request() 
-        //  . input('assigned_user_email', mssql.VarChar, assigned_user_email)
-        //  .execute("getProject")).recordset
-        res.json(project)
-    } catch (error) {
-        res.json({error})
-    }
-    
-    }
+        
+        }

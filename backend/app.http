@@ -3,8 +3,8 @@ POST http://localhost:7000/user/signup
 Content-Type: application/json
 
 {
-    "email":"mainaann367@gmail.com",
-    "name":"ann",
+    "email":"user5@gmail.com",
+    "name":"user5",
     "password":"12345678"
 }
 
@@ -15,7 +15,7 @@ POST http://localhost:7000/user/login
 Content-Type: application/json
 
 {
-    "email":"collinsfrontend@gmail.com",
+    "email":"user2@gmail.com",
     "password":"12345678"
 }
 
@@ -23,13 +23,13 @@ Content-Type: application/json
 ###
 
 GET  http://localhost:7000/user/homepage
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyYjE1NGUyLTA1MzQtNDk1Ni1hZWFkLTQ2NTc4MWEyMDc0YyIsIm5hbWUiOiJ1c2VyMSIsImVtYWlsIjoiam9uYXRoYW5uZGFtYnVraTE2QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwic3RhdHVzIjoiMSIsImlhdCI6MTY2MDMxMzY3OCwiZXhwIjoxNjYwMzE3Mjc4fQ.mkGNs92Dea4gG37Lc6uPn23POKF5jSpNfTRgK8S9bds
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkwMmFmNDc0LWVkMjgtNGYwMy1hMTdkLWNhOTE4YzY4NWY0NSIsIm5hbWUiOiJ1c2VyMiIsImVtYWlsIjoidXNlcjJAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJzdGF0dXMiOiIwIiwiaWF0IjoxNjYxOTE1NjczLCJleHAiOjE2NjE5MTkyNzN9.OOeFKRapCOhoUDIDTvflLeJx5nHlbHihow52jAdn_M8
 
 
 ###
 
 GET  http://localhost:7000/user/check
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlN2NjMGNmLTIxZDItNDE2My05NjkxLWZmMDM5MTU2N2VhMSIsIm5hbWUiOiJDb2xsaW5zIiwiZW1haWwiOiJjb2xsaW5zQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1OTk1NTA0MiwiZXhwIjoxNjU5OTU4NjQyfQ.x5Ioefpew5PDIEVlMCffzE8zMWbEboK3Oq79pUBhYJA
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkwMmFmNDc0LWVkMjgtNGYwMy1hMTdkLWNhOTE4YzY4NWY0NSIsIm5hbWUiOiJ1c2VyMiIsImVtYWlsIjoidXNlcjJAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJzdGF0dXMiOiIwIiwiaWF0IjoxNjYxOTE1NjczLCJleHAiOjE2NjE5MTkyNzN9.OOeFKRapCOhoUDIDTvflLeJx5nHlbHihow52jAdn_M8
 
 
 
@@ -43,10 +43,10 @@ POST http://localhost:7000/project/newproject
 Content-Type: application/json
 
 {
-    "name":"project 1",
+    "name":"project 5",
     "description":"This is project two",
     "end_date": "Aug 12 2022",
-    "assigned_user_email":"mainaann367@gmail.com"
+    "assigned_user_email":"user3@gmail.com"
 }
 
 ###
@@ -74,3 +74,10 @@ Content-Type: application/json
 {
     "assigned_user_email": "user1@gmail.com"
 }
+###
+POST http://localhost:7000/project/complete
+Content-Type: application/json
+
+{
+    "project_id":"b95de446-77b9-4084-9e5f-7f0b2073deec"
+ }

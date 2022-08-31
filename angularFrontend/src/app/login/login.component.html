@@ -1,0 +1,25 @@
+
+<div class="container">
+    <div class="formdiv" [ngStyle]="{'textAlign':'center'}">
+        <h1>Login</h1>
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+        
+            <div class="form-control">
+                <label for="">Email</label>
+                <input type="text" ngModel name="email" required email #email="ngModel">
+                <p class="error" *ngIf="!email.valid && email.touched">*Please enter a valid email</p>
+            </div>
+            <div class="form-control">
+                <label for="">Password</label>
+                <input type="text" ngModel name="password" required>
+            </div>
+        
+         
+            <button [disabled]="!form.valid"  type="submit">Submit</button>
+         
+        </form>
+    </div>
+    <div class="image">
+        <img src="assets/images/login.jpg" alt="">
+    </div>
+</div>

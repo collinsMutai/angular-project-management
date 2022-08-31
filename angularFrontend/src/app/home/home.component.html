@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="image">
+    <img src="assets/images/laptop.jpg" alt="" />
+  </div>
+  <div class="formdiv" [ngStyle]="{ textAlign: 'center' }">
+    <h1>Signup</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-control">
+        <label for="">Name</label>
+        <input type="text" formControlName="name" />
+        <div
+          *ngIf="!form.get('name')?.valid && form.get('name')?.touched"
+        >
+          <p class="error" *ngIf="!form.get('name')?.errors!['required']">
+           
+            *Please enter a username
+          </p>
+         
+        </div>
+      </div>
+      <div class="form-control">
+        <label for="">Email</label>
+        <input type="text" formControlName="email" />
+        <div *ngIf="!form.get('email')!.valid && form.get('email')!.touched">
+          <p class="error" *ngIf="!form.get('email')!.errors!['required']">
+            *Please enter email
+          </p>
+          <p class="error" *ngIf="!form.get('email')!.errors!['email']">
+            *Please enter a valid email
+          </p>
+        </div>
+      </div>
+      <div class="form-control">
+        <label for="">password</label>
+        <input type="text" formControlName="password" />
+        <div
+          *ngIf="!form.get('password')!.valid && form.get('password')!.touched"
+        >
+          <p class="error" *ngIf="form.get('password')!.errors!['required']">
+            *Please enter password
+          </p>
+          <p class="error" *ngIf="form.get('password')!.errors!['special']">
+            *Please enter a special character
+          </p>
+          <p class="error" *ngIf="form.get('password')!.errors!['capital']">
+            *Password should have uppercase letter
+          </p>
+          <p class="error" *ngIf="form.get('password')!.errors!['number']">
+            *Password should have a number
+          </p>
+          <p *ngIf="checkMinimum()">*Password should 8 characters or more</p>
+        </div>
+      </div>
+      <div class="form-control">
+        <button [disabled]="!form.valid" type="submit">Signup</button>
+      </div>
+    </form>
+  </div>
+</div>

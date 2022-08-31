@@ -9,23 +9,24 @@ const submit_project = document.getElementById("submit_project") as HTMLButtonEl
 // const pdescription = document.getElementById('pDescription') as HTMLParagraphElement;
 // const pEnddate = document.getElementById('pEnddate') as HTMLParagraphElement;
 const getusersDiv = document.getElementById('usersDiv') as HTMLDivElement;
-const allUsers=document.getElementById('allUsers') as HTMLInputElement
+const allUsers = document.getElementById('allUsers') as HTMLInputElement
 const getuserprojectDiv = document.getElementById('userProject') as HTMLDivElement
+const error= document.getElementById('error') as HTMLDivElement
 
 
 interface User {
     name: string
     email: string
-    status:number
+    status: number
 }
-interface   ProjectInterface {
+interface ProjectInterface {
     project_id: string,
-    name: string, 
-    description: string, 
+    name: string,
+    description: string,
     end_date: string,
-    issent:number,
-    user_id: string,
-    assigned_user_email:string
+    issent: number,
+    // user_id: string,
+    assigned_user_email: string
 }
 
 if (namess) {
@@ -38,10 +39,9 @@ class Projects {
     }
     constructor() { }
 
-    addProject(name: string, description: string, end_date: string, assigned_user_email:string) {
+    addProject(name: string, description: string, end_date: string, assigned_user_email: string) {
 
-         const prom = new Promise<{ name: string, description: string, end_date: string, assigned_user_email:string,error?: string, token?: string, message?: string }>((resolve, reject) => {
-            // console.log(email,password);
+        const prom = new Promise<{ error?: string, token?: string, message?: string }>((resolve, reject) => {
             fetch('http://localhost:7000/project/newproject', {
                 headers: {
                     'Accept': 'application/json',
@@ -61,10 +61,8 @@ class Projects {
                 reject(err)
             })
         })
-        prom.then(data => {
-            console.log(data);
+        prom.then((data) => {
             
-           
             this.fetchProject()
         }).catch(err => console.log(err))
 
@@ -74,41 +72,43 @@ class Projects {
         const res = await fetch('http://localhost:7000/project/projects');
         const data = await res.json();
 
-       
+
 
     }
 
     fetchUsers() {
+        const token = localStorage.getItem('token') as string
         new Promise<any>((resolve, reject) => {
             fetch('http://localhost:7000/user/users', {
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    token
                 },
                 method: "GET",
             }).then(res => resolve(res.json()))
                 .catch(err => reject(err))
         }).then(data => {
-           
-        
-         data.map((user:User)=>{
-      
-            let html = `
+
+
+            data.map((user: User) => {
+
+                let html = `
             <option value=${user.email}>${user.email}</option>
             `
-            
-           allUsers.insertAdjacentHTML('beforeend', html)
-           })
-  
+
+                allUsers.insertAdjacentHTML('beforeend', html)
+            })
+
 
         }
-      
+
         )
     }
 
 
     fetchProject() {
-        new Promise<any>((resolve, reject) => {
+        const prom=new Promise<ProjectInterface[]>((resolve, reject) => {
             fetch('http://localhost:7000/project/projects', {
                 headers: {
                     'Accept': 'application/json',
@@ -117,39 +117,42 @@ class Projects {
                 method: "GET",
             }).then(res => resolve(res.json()))
                 .catch(err => reject(err))
-        }).then(data => {
-            // console.log(data);
+        })
+        prom.then((data)=> {
+            console.log(data);
             
-              
-          data.map((project:ProjectInterface,index:number)=>{
-            console.log(project);
-           const projectcard = document.createElement('div')
-           projectcard.id='projectCard'
-            const h2 = document.createElement('h2')
-            const p1 = document.createElement('p')
-            const p2 = document.createElement('p')
-            const deleteBtn = document.createElement('button')
-            h2.textContent = project.name
-            p1.textContent =   `Project description: ${project.description}`
-            p2.textContent= `Assigned to user: ${project.assigned_user_email}`
-            deleteBtn.textContent='Delete project'
-            deleteBtn.id='deleteBtn'
-            projectcard.append(h2,p1,p2, deleteBtn)
-            getuserprojectDiv.append(projectcard)
-            const projectId = `${project.project_id}`
-            deleteBtn.addEventListener('click', (e)=>{
-                this.handleDelete(index,projectId)
-                
+            getuserprojectDiv.innerHTML = '';
+            data.map((project:ProjectInterface) => {
+                const projectcard = document.createElement('div')
+                projectcard.id = 'projectCard'
+                const h2 = document.createElement('h2')
+                const p1 = document.createElement('p')
+                const p2 = document.createElement('p')
+                const deleteBtn = document.createElement('button')
+                h2.textContent = project.name
+                p1.textContent = `Project description: ${project.description}`
+                p2.textContent = `Assigned to user: ${project.assigned_user_email}`
+                deleteBtn.textContent = 'Delete project'
+                deleteBtn.id = 'deleteBtn'
+                projectcard.append(h2, p1, p2, deleteBtn)
+                getuserprojectDiv.append(projectcard)
+                const projectId = `${project.project_id}`
+                deleteBtn.addEventListener('click', (e) => {
+                    this.handleDelete(projectId)
+                    setTimeout(()=>{
+                        window.location.reload()
+                    },1000)
+
+                })
             })
-           })
-    
-    
+
+
         }
-      
+
         )
     }
-    handleDelete(index:number,projectId:string){
-        const prom =new Promise<{projectId:string}>((resolve, reject) => {
+    handleDelete( projectId: string) {
+        const prom = new Promise<{ projectId: string }>((resolve, reject) => {
             fetch('http://localhost:7000/project/deleteProject', {
                 headers: {
                     'Accept': 'application/json',
@@ -163,12 +166,11 @@ class Projects {
                 .catch(err => reject(err))
         })
         prom.then(data => {
-            console.log(data,index, projectId);
+            console.log(data, projectId);
             // this.addProject()
 
         }).catch(err => console.log(err))
-        // console.log(index);
-        
+
     }
 }
 
@@ -176,8 +178,9 @@ class Projects {
 
 const u = new Projects()
 u.fetchUsers()
-const userp = new Projects()
-userp.fetchProject()
+u.fetchProject()
+// const userp = new Projects()
+// userp.fetchProject()
 
 
 submit_project.addEventListener('click', () => {
@@ -186,13 +189,15 @@ submit_project.addEventListener('click', () => {
     const enddateinput = project_end_date.value;
     const assignedemailinput = allUsers.value;
     project_name.value = '';
-    project_description.value='';
-    project_end_date.value='';
+    project_description.value = '';
+    project_end_date.value = '';
 
-    if (nameinput == '' || descriptioninput == '' || enddateinput == '' || assignedemailinput=='' ) {
+    if (nameinput == '' || descriptioninput == '' || enddateinput == '' || assignedemailinput == '') {
         console.log('Please fill in all fields');
+        // error.style.color="red"
+        // error.innerHTML = 'Please fill in all fields'
     } else {
-       
+
         Projects.getProject().addProject(nameinput, descriptioninput, enddateinput, assignedemailinput)
     }
 

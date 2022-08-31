@@ -1,0 +1,18 @@
+<div class="navLinks">
+    <a routerLink="">Home</a>
+    <!-- <a routerLink="user">User</a>
+    <a routerLink="admin">Admin</a> -->
+    <a
+   routerLink="login"
+    routerLinkActive="active"
+    *ngIf="!authService.isLoggedin"
+    >Login</a
+  >
+  <a
+    (click)="onLogout()"
+    *ngIf="authService.isLoggedin"
+    >Logout</a
+  >
+</div>
+
+<router-outlet></router-outlet>

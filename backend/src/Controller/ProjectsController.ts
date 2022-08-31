@@ -97,8 +97,9 @@ export const getallProjects = async(req: Extended, res: Response)=>{
         const pool = await mssql.connect(sqlConfig)
         const allprojects:Project[] = await (await pool.request().execute("getallprojects")).recordset
         console.log(allprojects);
-        res.json(allprojects)
         
+        res.json(allprojects)
+    
     } catch (error) {
         console.log(error);
         
@@ -123,3 +124,22 @@ export const getallProjects = async(req: Extended, res: Response)=>{
         }
         
         }
+
+        export const completeProjects = async(req: Extended, res: Response)=>{
+            try {
+                const pool=await mssql.connect(sqlConfig)
+                const {project_id}= req.body
+                const {error , value}= UserSchema6.validate(req.body)
+                if(error){
+                    return res.json({error:error.details[0].message})
+                }
+                const cproject:Project[]=await( await pool.request()
+                . input('project_id', mssql.VarChar, project_id)
+                .execute('completeProject')).recordset
+              
+                res.json(cproject)
+            } catch (error) {
+                res.json({error})
+            }
+            
+            }

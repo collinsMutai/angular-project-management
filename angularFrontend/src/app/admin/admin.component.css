@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px;
+  }
+  .image{
+    flex: 1;
+  }
+  img{
+    width: 100%;
+  }
+  .formdiv {
+      margin-bottom: 100px;
+      flex: 1;
+    }
+    .form-control{
+      padding: 10px;
+    }
+    form{
+      width: 100%;
+    }
+    label{
+      padding: 5px;
+    }
+    input{
+      width: 50%;
+    }

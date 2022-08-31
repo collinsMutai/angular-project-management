@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="image">
+    <img src="assets/images/laptop.jpg" alt="" />
+  </div>
+  <div class="formdiv" [ngStyle]="{ textAlign: 'center' }">
+    <h1>Assign A Project</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-control">
+        <label for="">Name</label>
+        <input type="text" formControlName="name" />
+        <div></div>
+      </div>
+      <div class="form-control">
+        <label for="">Email</label>
+        <input type="text" formControlName="email" />
+        <div></div>
+      </div>
+      <div class="form-control">
+        <label for="">password</label>
+        <input type="text" formControlName="password" />
+        <div></div>
+      </div>
+      <div class="form-control">
+        <button type="submit">Signup</button>
+      </div>
+    </form>
+  </div>
+</div>

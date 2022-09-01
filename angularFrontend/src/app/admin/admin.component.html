@@ -4,7 +4,7 @@
       <img src="assets/images/laptop.jpg" alt="" />
     </div>
     <div class="formdiv" [ngStyle]="{ textAlign: 'center' }">
-      <h1 style="color: red">
+      <h1 style="color: green">
         {{ "Welcome Admin: " + names + ". Assign A Project" }}
       </h1>
       <form #myForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -24,7 +24,7 @@
           <label for="">Assign Project To User</label>
           <select formControlName="assigned_user_email">
             <option *ngFor="let select of selectOptions" [value]="select.email">
-           
+
               {{ select.email }}
             </option>
           </select>

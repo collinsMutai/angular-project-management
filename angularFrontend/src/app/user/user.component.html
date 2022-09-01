@@ -1,1 +1,16 @@
-<p>user works!</p>
+<div class="container">
+  <h1 style="color: green">
+    {{ "Welcome User: " + names + ". Here's Your Project" }}
+  </h1>
+  <div class="projects">
+    <div class="card" *ngFor="let project of userProject">
+      <h1>{{project.name}}</h1>
+      <p>{{project.description}}</p>
+      <p>{{project.assigned_user_email}}</p>
+      <p>{{project.end_date}}</p>
+      <button>Complete</button>
+    </div>
+  </div>
+
+</div>
+

@@ -15,7 +15,7 @@ router.post('/newproject', addNewProject)
 router.post('/assignnewproject', assignNewProject)
 router.post('/deleteProject', deleteProject)
 router.get('/projects',getallProjects)
-router.post('/project', getProject)
+router.get('/project/:email', getProject)
 router.put('/complete:projectId', completeProjects)
 
 

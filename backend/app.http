@@ -68,12 +68,8 @@ Content-Type: application/json
 GET  http://localhost:7000/project/projects
 
 ###
-POST  http://localhost:7000/project/project
-Content-Type: application/json
+GET  http://localhost:7000/project/project/user3@gmail.com
 
-{
-    "assigned_user_email": "user3@gmail.com"
-}
 ###
 POST http://localhost:7000/project/complete
 Content-Type: application/json

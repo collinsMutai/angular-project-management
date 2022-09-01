@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectInterface } from '../interfaces/project';
 import { UserService } from '../Services/user.service';
 
 @Component({
@@ -7,10 +8,13 @@ import { UserService } from '../Services/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
+  userProject: ProjectInterface[]=[];
+  names: string | null = '';
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {
+    this.names = localStorage.getItem('name');
+
     this.getProject()
   }
 getProject(){
@@ -18,6 +22,7 @@ getProject(){
   this.userService.fetchProject().subscribe(
     (response)=>{
       console.log(response);
+      this.userProject = response
 
     }
   )

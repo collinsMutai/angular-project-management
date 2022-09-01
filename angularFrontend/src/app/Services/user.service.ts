@@ -14,11 +14,9 @@ baseUrl="http://localhost:7000/project/project"
 this.fetchProject()
   }
 
-  fetchProject():Observable<ProjectInterface>{
+  fetchProject():Observable<ProjectInterface[]>{
     const assigned_user_email = localStorage.getItem('email') as string
 
-    return this.http.get<ProjectInterface>(`${this.baseUrl}`,{
-      headers:new HttpHeaders({assigned_user_email})
-    } )
+    return this.http.get<ProjectInterface[]>(`${this.baseUrl}/${assigned_user_email}`)
   }
 }

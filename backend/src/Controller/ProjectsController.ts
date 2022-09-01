@@ -111,16 +111,13 @@ export const getallProjects = async(req: Extended, res: Response)=>{
     export const getProject = async(req: Extended, res: Response)=>{
         try {
             const pool=await mssql.connect(sqlConfig)
-            const {assigned_user_email}= req.body
-            const {error , value}= UserSchema5.validate(req.body)
-            if(error){
-                return res.json({error:error.details[0].message})
-            }
+            const assigned_user_email= req.params.email
+            
             const getproject:Project[]=await( await pool.request()
             . input('assigned_user_email', mssql.VarChar, assigned_user_email)
             .execute('getProject')).recordset
           
-            res.json(getproject)
+            return res.json(getproject)
         } catch (error) {
             res.json({error})
         }

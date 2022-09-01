@@ -57,12 +57,8 @@ Content-Type: application/json
     "user_id":"ffba3ac2-e3aa-47af-9575-79db177b2e80"}
 
 ###
-POST http://localhost:7000/project/deleteProject
-Content-Type: application/json
+GET http://localhost:7000/project/deleteProject/7367ae5b-fc02-4295-88d2-5c70169fc608
 
-{
-    "project_id":"e85a111f-c2a5-4b69-85e6-174306f21fd4"
-    }
 
 ###
 GET  http://localhost:7000/project/projects

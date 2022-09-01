@@ -41,7 +41,7 @@
       <p>{{project.description}}</p>
       <p>{{project.assigned_user_email}}</p>
       <p>{{project.end_date}}</p>
-      <button>delete project</button>
+      <button (click)="deleteuserProject(project.project_id)">delete project</button>
     </div>
   </div>
 </div>

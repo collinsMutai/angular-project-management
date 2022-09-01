@@ -11,6 +11,7 @@ export class AdminService {
 baseUrl="http://localhost:7000/user/users"
 assignProjectUrl="http://localhost:7000/project/newproject"
 projectsUrl="http://localhost:7000/project/projects"
+deleteProjectUrl="http://localhost:7000/project/deleteProject"
   constructor(private http:HttpClient) { }
 
   fetchUsers():Observable<User[]>{
@@ -21,5 +22,10 @@ projectsUrl="http://localhost:7000/project/projects"
   }
   fetchProjects():Observable<ProjectInterface[]>{
     return this.http.get<ProjectInterface[]>(`${this.projectsUrl}`)
+  }
+  deleteProject(project_id:string):Observable<ProjectInterface[]>{
+ 
+    return this.http.get<ProjectInterface[]>(`${this.deleteProjectUrl}/${project_id}`)
+
   }
 }

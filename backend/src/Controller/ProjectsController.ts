@@ -77,17 +77,13 @@ export const assignNewProject=async( req:ExtendedRequest, res:Response)=>{
 export const deleteProject=async( req:ExtendedRequest, res:Response)=>{
     try {
         const pool=await mssql.connect(sqlConfig)
-        const {project_id}= req.body
-        const {error , value}= UserSchema6.validate(req.body)
-        if(error){
-            return res.json({error:error.details[0].message})
-        }
-      
-        await pool.request()
-        . input('project_id', mssql.VarChar, project_id)
-        .execute('deleteProject')
+        const project_id= req.params.project_id
 
-      
+        const deleteProj:Project[]=await( await pool.request()
+            . input('project_id', mssql.VarChar, project_id)
+            .execute('deleteProject')).recordset
+          
+         
         res.json({message:'Deleted project...'})
     } catch (error) {
         res.json({error})

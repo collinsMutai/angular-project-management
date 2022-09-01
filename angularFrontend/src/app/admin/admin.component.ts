@@ -24,6 +24,7 @@ export class AdminComponent implements OnInit {
     this.names = localStorage.getItem('name');
     this.getUsers();
     this.getProjects();
+    // this.deleteuserProject(project_id)
     this.form = new FormGroup({
       name: new FormControl(null),
       description: new FormControl(null),
@@ -56,5 +57,14 @@ export class AdminComponent implements OnInit {
       console.log(this.projects);
 
     })
+  }
+  deleteuserProject(project_id:string){
+    this.adminService.deleteProject(project_id).subscribe(
+      (response)=>{
+        console.log(response);
+        this.getProjects()
+
+      }
+    )
   }
 }

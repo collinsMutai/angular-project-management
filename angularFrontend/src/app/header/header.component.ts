@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(public authService:AuthService, private router:Router) { }
 
   ngOnInit(): void {
+
   }
   prom= new Promise<string>((resolve,reject)=>{
     setTimeout(()=>{

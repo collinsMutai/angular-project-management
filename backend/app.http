@@ -43,10 +43,10 @@ POST http://localhost:7000/project/newproject
 Content-Type: application/json
 
 {
-    "name":"project 5",
-    "description":"This is project two",
+    "name":"projectcvccccvvHJ",
+    "description":"This is project HN",
     "end_date": "Aug 12 2022",
-    "assigned_user_email":"user3@gmail.com"
+    "assigned_user_email":"user2@gmail.com"
 }
 
 ###
@@ -72,7 +72,7 @@ POST  http://localhost:7000/project/project
 Content-Type: application/json
 
 {
-    "assigned_user_email": "user1@gmail.com"
+    "assigned_user_email": "user3@gmail.com"
 }
 ###
 POST http://localhost:7000/project/complete

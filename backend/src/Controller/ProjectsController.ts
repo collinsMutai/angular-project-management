@@ -54,16 +54,18 @@ export const addNewProject=async( req:ExtendedRequest, res:Response)=>{
 export const assignNewProject=async( req:ExtendedRequest, res:Response)=>{
     try {
         const pool=await mssql.connect(sqlConfig)
-        const {name, user_id}= req.body
-        const {error , value}= UserSchema4.validate(req.body)
+        const {name, description, end_date, assigned_user_email}= req.body
+        const {error , value}= UserSchema3.validate(req.body)
         if(error){
             return res.json({error:error.details[0].message})
         }
       
         await pool.request()
         . input('name', mssql.VarChar, name)
-        . input('user_id', mssql.VarChar, user_id)
-        .execute('assignProject')
+        . input('description', mssql.VarChar, description)
+        . input('end_date', mssql.VarChar, end_date)
+        . input('assigned_user_email', mssql.VarChar, assigned_user_email)
+        .execute('assignNewProject')
 
       
         res.json({message:'Assigned new project...'})

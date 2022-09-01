@@ -3,3 +3,8 @@ AS
 BEGIN
 SELECT * FROM UsersTable
 END
+CREATE PROCEDURE getProjectUsers
+AS
+BEGIN
+SELECT * FROM UsersTable WHERE [status] =0
+END

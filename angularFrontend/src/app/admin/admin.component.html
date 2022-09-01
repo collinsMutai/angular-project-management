@@ -1,28 +1,47 @@
 <div class="container">
-  <div class="image">
-    <img src="assets/images/laptop.jpg" alt="" />
+  <div class="container2">
+    <div class="image">
+      <img src="assets/images/laptop.jpg" alt="" />
+    </div>
+    <div class="formdiv" [ngStyle]="{ textAlign: 'center' }">
+      <h1 style="color: red">
+        {{ "Welcome Admin: " + names + ". Assign A Project" }}
+      </h1>
+      <form #myForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-control">
+          <label for="">Project Name</label>
+          <input type="text" formControlName="name" />
+        </div>
+        <div class="form-control">
+          <label for="">Project Description</label>
+          <input type="text" formControlName="description" />
+        </div>
+        <div class="form-control">
+          <label for="">End Date</label>
+          <input type="date" formControlName="end_date" />
+        </div>
+        <div class="form-control">
+          <label for="">Assign Project To User</label>
+          <select formControlName="assigned_user_email">
+            <option *ngFor="let select of selectOptions" [value]="select.email">
+           
+              {{ select.email }}
+            </option>
+          </select>
+        </div>
+        <div class="form-control">
+          <button type="submit">Assign Project</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="formdiv" [ngStyle]="{ textAlign: 'center' }">
-    <h1>Assign A Project</h1>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-control">
-        <label for="">Name</label>
-        <input type="text" formControlName="name" />
-        <div></div>
-      </div>
-      <div class="form-control">
-        <label for="">Email</label>
-        <input type="text" formControlName="email" />
-        <div></div>
-      </div>
-      <div class="form-control">
-        <label for="">password</label>
-        <input type="text" formControlName="password" />
-        <div></div>
-      </div>
-      <div class="form-control">
-        <button type="submit">Signup</button>
-      </div>
-    </form>
+  <div class="projects">
+    <div class="card" *ngFor="let project of projects">
+      <h1>{{project.name}}</h1>
+      <p>{{project.description}}</p>
+      <p>{{project.assigned_user_email}}</p>
+      <p>{{project.end_date}}</p>
+      <button>delete project</button>
+    </div>
   </div>
 </div>

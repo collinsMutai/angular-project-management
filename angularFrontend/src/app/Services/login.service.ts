@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http"
 import { Observable } from 'rxjs';
 import { login } from '../interfaces/login';
+import { ProjectInterface } from '../interfaces/project';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,7 @@ export class UserService {
     }
     )
   }
+
+
 }
 

@@ -34,10 +34,9 @@ export class LoginComponent implements OnInit {
     );
   }
   redirect(){
-    const token = localStorage.getItem('token') as string
     this.userService.checkuser().subscribe(
       (response)=>{
-        console.log(response);
+        // console.log(response);
         localStorage.setItem('name', response.name)
         localStorage.setItem('email', response.email)
         localStorage.setItem('role', response.role)

@@ -64,12 +64,7 @@ GET http://localhost:7000/project/deleteProject/7367ae5b-fc02-4295-88d2-5c70169f
 GET  http://localhost:7000/project/projects
 
 ###
-GET  http://localhost:7000/project/project/user3@gmail.com
+GET  http://localhost:7000/project/project/ghjhjkk@gmail.com
 
 ###
-POST http://localhost:7000/project/complete
-Content-Type: application/json
-
-{
-    "project_id":"b95de446-77b9-4084-9e5f-7f0b2073deec"
- }
+Get http://localhost:7000/project/complete/54cac16d-c214-4c22-8121-77d451800310

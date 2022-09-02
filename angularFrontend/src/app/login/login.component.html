@@ -3,7 +3,7 @@
     <div class="formdiv" [ngStyle]="{'textAlign':'center'}">
         <h1>Login</h1>
         <form #form="ngForm" (ngSubmit)="onSubmit()">
-        
+
             <div class="form-control">
                 <label for="">Email</label>
                 <input type="text" ngModel name="email" required email #email="ngModel">
@@ -13,10 +13,10 @@
                 <label for="">Password</label>
                 <input type="text" ngModel name="password" required>
             </div>
-        
-         
+
+
             <button [disabled]="!form.valid"  type="submit">Submit</button>
-         
+
         </form>
     </div>
     <div class="image">

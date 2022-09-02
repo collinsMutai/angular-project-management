@@ -1,18 +1,20 @@
 <div class="navLinks">
-    <a routerLink="">Home</a>
-    <!-- <a routerLink="user">User</a>
-    <a routerLink="admin">Admin</a> -->
+    <a routerLink="" >Home</a>
+    <a routerLink="user"  *ngIf="authService.isLoggedin()">User</a>
+    <a routerLink="admin"  *ngIf="authService.isLoggedin()">Admin</a>
     <a
    routerLink="login"
     routerLinkActive="active"
-    *ngIf="!authService.isLoggedin"
+    *ngIf="!authService.isLoggedin()"
     >Login</a
   >
   <a
     (click)="onLogout()"
-    *ngIf="authService.isLoggedin"
+    *ngIf="authService.isLoggedin()"
     >Logout</a
   >
 </div>
+<div [@routeAnimations]="getRouteAnimationData()">
+  <router-outlet></router-outlet>
+</div>
 
-<router-outlet></router-outlet>

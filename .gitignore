@@ -6,3 +6,4 @@ frontend/node_modules
 emailservice/dist
 emailservice/node_modules
 emailservice/.env
+frontend

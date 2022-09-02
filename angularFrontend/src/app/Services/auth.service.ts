@@ -6,22 +6,12 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   constructor() { }
-  isLoggedin=false
 
-  login(){
-    this.isLoggedin=true
+
+  isLoggedin(){
+    return !!localStorage.getItem('token')
   }
   logout(){
-    this.isLoggedin=false
-  }
-  isauthenticated(){
-    const promise = new Promise<boolean>((
-      resolve,reject
-    )=>{
-      setTimeout(() => {
-        resolve(this.isLoggedin)
-      }, 500);
-    })
-    return promise
+    localStorage.clear()
   }
 }

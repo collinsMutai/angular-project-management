@@ -123,11 +123,8 @@ export const getallProjects = async(req: Extended, res: Response)=>{
         export const completeProjects = async(req: Extended, res: Response)=>{
             try {
                 const pool=await mssql.connect(sqlConfig)
-                const {project_id}= req.body
-                const {error , value}= UserSchema6.validate(req.body)
-                if(error){
-                    return res.json({error:error.details[0].message})
-                }
+                const project_id= req.params.project_id
+    
                 const cproject:Project[]=await( await pool.request()
                 . input('project_id', mssql.VarChar, project_id)
                 .execute('completeProject')).recordset

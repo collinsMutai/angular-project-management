@@ -4,4 +4,6 @@ export interface login{
     error: string
     message:string
     token:string
+    role:string
+    name:string
 }

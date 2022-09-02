@@ -16,7 +16,7 @@ router.post('/assignnewproject', assignNewProject)
 router.get('/deleteProject/:project_id', deleteProject)
 router.get('/projects',getallProjects)
 router.get('/project/:email', getProject)
-router.put('/complete:projectId', completeProjects)
+router.get('/complete/:project_id', completeProjects)
 
 
 export default router

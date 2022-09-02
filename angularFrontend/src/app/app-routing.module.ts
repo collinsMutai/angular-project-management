@@ -7,15 +7,17 @@ import { AuthGuardService } from './Services/auth-guard.service';
 import { UserComponent } from './user/user.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', component: HomeComponent, data:{animation:'home'} },
+  { path: 'login', component: LoginComponent, data:{animation:'login'} },
 
   {
-    path: 'user',
+    path: 'user', canActivate:[AuthGuardService],
+    data:{user:true},
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
   {
-    path: 'admin',
+    path: 'admin', canActivate:[AuthGuardService],
+    data:{admin:true},
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
